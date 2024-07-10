@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamline Diagnosis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../public/App.css"/>
+    <link rel="icon" href="../public/favicon.png"/>
+</head>
+<body onload="user();">
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand nav-head" href="/">
+               <img src="../public/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+                Streamline Diagnosis
+            </a>
+			<ul class="nav justify-content-end" id="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/diagnosis">Diagnosis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Blogs</a>
+                </li>
+            </ul>
+            <button class="navbar-toggler" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="navbar_toggle();">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+        </nav>
+	</header>
+    <section id="home" class="workspace">
+        <div class="home-body flo">
+            <div class="home-body-left">
+                <h2>Welcome to Streamline Diagnosis!</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque dolorem amet quibusdam suscipit nostrum tempore iure commodi maxime quaerat officiis? Facere fugiat nisi voluptates enim cum illo sed minima fuga culpa repellat.</p>
+                <div class="flo">
+                    <button class="btn btn-info" onclick="route('./diagnosis')">Diagnosis</button>
+                    <button class="btn btn-outline-info">Learn more..</button>
+                </div>
+                <div class="social-icon flo">
+                    <div class="round-icon"><i class="fa fa-facebook"></i></div>
+                    <div class="round-icon"><i class="fa fa-twitter"></i></div>
+                    <div class="round-icon"><i class="fa fa-github"></i></div>
+                    <div class="round-icon"><i class="fa fa-google"></i></div>
+                </div>
+            </div>
+            <div class="home-body-right">
+                <div class="images">
+                    <img src="../images/side-img3.png" class="imgslid" alt="load"/>
+                    <img src="../images/side-img2.jpg" class="imgslid" alt="load"/>
+                    <img src="../images/side-img1.jpg" class="imgslid" alt="load"/>
+                    <img src="../images/side-img2.jpg" class="imgslid" alt="load"/>
+                    <img src="../images/side-img1.jpg" class="imgslid" alt="load"/>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div>
+                <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+                    <defs>
+                        <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    </defs>
+                    <g class="parallax">
+                        <use xlink:href="#gentle-wave" x="48" y="0" fill="rgb(56, 163, 165, 0.7)" />
+                        <use xlink:href="#gentle-wave" x="48" y="3" fill="rgb(56, 153, 162, 0.5)" />
+                        <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(82, 255, 87,0.3)" />
+                        <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(72,155,165,0.6)" />
+                    </g>
+                </svg>
+            </div>
+            <div class="content">
+                <div class="container flo">
+                    <img src="../public/favicon.png" width="20" height="20" alt="loade">
+                    <h6>Streamline Diagnosis</h6>
+                </div>
+            </div>       
+        </footer>
+    </section>
+    <section class="workspace blbg" id="side-menu" onclick="navbar_toggle();"></section>
+</body>
+<script src="../public/App.js"></script>
+</html>

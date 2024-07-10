@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamline Diagnosis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../public/App.css"/>
+    <link rel="icon" href="../public/favicon.png"/>
+</head>
+<body onload="user();">
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand nav-head" href="/">
+               <img src="../public/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+                Streamline Diagnosis
+            </a>
+			<ul class="nav justify-content-end" id="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/diagnosis">Diagnosis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Blogs</a>
+                </li>
+            </ul>
+            <button class="navbar-toggler" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="navbar_toggle();">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+        </nav>
+	</header>
+    <section id="diabetes" class="workspace">
+        <div class="related-diagnosis">
+            <ul>
+                <li onclick="invaild();">Himoglobine Test</li>
+                <li onclick="invaild();">Urine Test</li>
+                <li onclick="invaild();">Vision Test</li>
+                <li onclick="invaild();">Breast Canser Test</li>
+                <li onclick="invaild();">ECGI Test</li>
+                <li onclick="invaild();">Heart Disease</li>
+            </ul>
+        </div>
+        <div class="home-body flo">
+            <div class="home-body-left">
+                <!-- <form action="/diabetes/predict" method="get"> -->
+                <form onsubmit="validateForm(event);">
+                    <div class="form-head">Diabetes Diagnosis</div>
+                    <div class="form-body">
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label for="diabetes-name">Name</label>
+                                <input type="name" class="form-control" id="diabetes-name" placeholder="Enter Pasent Name" name="name" required="true" onkeydown="validName('diabetes-name');"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="diabetes-age">Age (DOB)</label>
+                                <input type="date" class="form-control" id="diabetes-age" placeholder="Enter Pasent DOB" name="age" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label for="diabetes-bp">Blood Pressure</label>
+                                <input type="number" class="form-control" id="diabetes-bp" placeholder="Enter Blood Pressure" name="bp" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="diabetes-glu">Glucose Level</label>
+                                <input type="number" class="form-control" id="diabetes-glu" placeholder="Enter Glucose Level" name="glu" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label for="diabetes-fru">Frequent Urination</label>
+                                <input type="text" class="form-control" id="diabetes-fru" placeholder="Enter Frequent Urination" name="fru" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="diabetes-blv">Blurred Vision</label>
+                                <input type="text" class="form-control" id="diabetes-blv" placeholder="Enter Blurred Vision" name="blv" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col form-group">
+                                <label for="diabetes-sh">Slow Healing</label>
+                                <input type="text" class="form-control" id="diabetes-sh" placeholder="Enter Slow Healing" name="slh" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                            <div class="col form-group">
+                                <label for="diabetes-wl">Weight Loss</label>
+                                <input type="text" class="form-control" id="diabetes-wl" placeholder="Enter Weight Loss" name="wl" required="true"/>
+                                <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-group condition-btn">
+                        <button class="btn btn-danger" type="clear" onclick="route('./');">Abort</button>
+                        <button class="btn btn-info" type="submit">Process</button>
+                    </div>
+                </form>
+            <% if (typeof result !== 'undefined'){ %>
+                <div class="blbg" style="height: 100%;">
+                    <div class="result-diagnosis">
+                        <h2>Diabetes Diagnosis</h2>
+                        <hr>
+                        <h6>Pasent Name: <%= name %></h6>
+                        <h6>Result: <%= result.value==0?'No':'Yes' %></h6>
+                        <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae expedita officiis culpa amet temporibus quis veritatis quod rerum et est!</small>
+                        <hr>
+                        <div class="button-group condition-btn">
+                            <button class="btn btn-danger" type="clear" onclick="route('./');">Back</button>
+                        </div>
+                    </div>
+                </div>
+            <% } %>
+            </div>
+            <div class="home-body-right">
+                <div class="image">
+                    <img src="../images/diabetes.png" style="margin-top: 40px;" alt="load"/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="workspace blbg" id="side-menu" onclick="navbar_toggle();"></section>
+</body>
+<script src="../public/App.js"></script>
+<script>
+function validateForm(event){
+    event.preventDefault();
+    var name = document.getElementById('diabetes-name').value;
+    var age = document.getElementById('diabetes-age').value;
+    var bp = document.getElementById('diabetes-bp').value;
+    var glu = document.getElementById('diabetes-glu').value;
+    var fru = document.getElementById('diabetes-fru').value;
+    var blv = document.getElementById('diabetes-blv').value;
+    var sh = document.getElementById('diabetes-sh').value;
+    var wl = document.getElementById('diabetes-wl').value;
+
+    if (!age || age <= 0) {
+        alert('Please enter a valid age.');
+        return false;
+    }
+    
+    window.location.href = `/diabetes/predict?name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`;
+    return true;
+}
+function validName(id){
+    if(document.getElementById(id).value == ''){
+        document.getElementById(id).style.borderColor = "#ced4da";
+    }else{
+        if(validUserName(document.getElementById(id).value)){
+            document.getElementById(id).style.borderColor = "Green";
+        }else{
+            document.getElementById(id).style.borderColor = "Red";
+        }
+    }
+}
+</script>
+</html>

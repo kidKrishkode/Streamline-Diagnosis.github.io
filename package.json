@@ -1,0 +1,20 @@
+{
+  "name": "Streamline Diagnosis",
+  "version": "1.0.0",
+  "description": "A simple Diagnosis system using Node.js, Express, Sci-kit learn, and EJS",
+  "main": "server.js",
+  "scripts": {
+    "build": "ejs-cli views/ -o build/",
+    "start": "node server.js"
+  },
+  "author": "Krishnendu Mitra",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "jimp": "^0.3.11",
+    "socket.io": "^4.7.5"
+  }
+}

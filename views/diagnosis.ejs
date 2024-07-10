@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamline Diagnosis</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../public/App.css"/>
+    <link rel="icon" href="../public/favicon.png"/>
+</head>
+<body onload="user();">
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <a class="navbar-brand nav-head" href="/">
+               <img src="../public/favicon.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
+                Streamline Diagnosis
+            </a>
+			<ul class="nav justify-content-end" id="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/diagnosis">Diagnosis</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Blogs</a>
+                </li>
+            </ul>
+            <button class="navbar-toggler" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="navbar_toggle();">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+        </nav>
+	</header>
+    <section class="workspace">
+        <a href="./diabetes"><button class="btn btn-info">Diabetes Test</button></a>
+    </section>
+    <section class="workspace blbg" id="side-menu" onclick="navbar_toggle();"></section>
+</body>
+<script src="../public/App.js"></script>
+</html>
