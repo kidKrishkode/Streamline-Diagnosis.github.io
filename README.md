@@ -1,8 +1,6 @@
 # Streamline Diagnosis 🩺🔍
 **Streamline Diagnosis** is a simple and efficient diagnosis system designed to analyze and predict various diseases using raw data. Powered by the **JPEN** (JSON-Python-Embedded-Node) stack, it offers a beautiful UI/UX while employing advanced machine learning techniques for accurate predictions.
-
 ![Streamline Diagnosis](https://kidKrishkode.github.io/Streamline-Diagnosis.github.io/public/favicon.png)
-
 ## Why "Streamline Diagnosis"? 🌟
 The name **Streamline Diagnosis** reflects the core functionality and philosophy of the application:
 - **Streamline** signifies the smooth and efficient process of data analysis and disease prediction.
@@ -26,6 +24,7 @@ The primary aim of **Streamline Diagnosis** is to provide a user-friendly platfo
 - **Disease Prediction**: Analyze raw data to predict diabetes, heart disease, breast cancer, and more.
 - **Machine Learning Models**: Utilizes relational regression and supervised learning.
 - **JPEN Stack**: Seamless integration of JSON, Python, and Node.js for a robust application.
+![Streamline Diagnosis](https://kidKrishkode.github.io/Streamline-Diagnosis.github.io/images/jpen.png)
 - **User-Friendly Interface**: Intuitive and visually appealing design.
 - **Cross-Platform Compatibility**: Accessible from multiple devices.
 
