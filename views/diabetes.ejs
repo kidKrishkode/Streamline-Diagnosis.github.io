@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../public/App.css"/>
     <link rel="icon" href="../public/favicon.png"/>
 </head>
-<body onload="user();">
+<body>
     <header>
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand nav-head" href="/">
@@ -24,10 +24,10 @@
                     <a class="nav-link active" href="/diagnosis">Diagnosis</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">About</a>
+                    <a class="nav-link" href="/about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Blogs</a>
+                    <a class="nav-link" href="/blogs">Blogs</a>
                 </li>
             </ul>
             <button class="navbar-toggler" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation" onclick="navbar_toggle();">
@@ -55,48 +55,60 @@
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="diabetes-name">Name</label>
-                                <input type="name" class="form-control" id="diabetes-name" placeholder="Enter Pasent Name" name="name" required="true" onkeydown="validName('diabetes-name');"/>
+                                <input type="name" class="form-control" id="diabetes-name" placeholder="Enter Pasent Name" name="name" required="true" onkeyup="checkName('diabetes-name');"/>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                             <div class="col form-group">
                                 <label for="diabetes-age">Age (DOB)</label>
-                                <input type="date" class="form-control" id="diabetes-age" placeholder="Enter Pasent DOB" name="age" required="true"/>
+                                <input type="date" class="form-control" id="diabetes-age" placeholder="Enter Pasent DOB" name="age" required="true" onchange="checkAge('diabetes-age',100,4);"/>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="diabetes-bp">Blood Pressure</label>
-                                <input type="number" class="form-control" id="diabetes-bp" placeholder="Enter Blood Pressure" name="bp" required="true"/>
+                                <input type="number" class="form-control" id="diabetes-bp" placeholder="Enter Blood Pressure" name="bp" required="true" onkeyup="checkRange('diabetes-bp',180,70);"/>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                             <div class="col form-group">
                                 <label for="diabetes-glu">Glucose Level</label>
-                                <input type="number" class="form-control" id="diabetes-glu" placeholder="Enter Glucose Level" name="glu" required="true"/>
+                                <input type="number" class="form-control" id="diabetes-glu" placeholder="Enter Glucose Level" name="glu" required="true" onkeyup="checkRange('diabetes-glu',180,80);"/>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="diabetes-fru">Frequent Urination</label>
-                                <input type="text" class="form-control" id="diabetes-fru" placeholder="Enter Frequent Urination" name="fru" required="true"/>
+                                <select class="form-control" id="diabetes-fru" name="fru" required="true" onchange="checkOptions('diabetes-fru');">
+                                    <option selected="true">NO</option>
+                                    <option>YES</option>
+                                </select>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                             <div class="col form-group">
                                 <label for="diabetes-blv">Blurred Vision</label>
-                                <input type="text" class="form-control" id="diabetes-blv" placeholder="Enter Blurred Vision" name="blv" required="true"/>
+                                <select class="form-control" id="diabetes-blv" name="blv" required="true" onchange="checkOptions('diabetes-blv');">
+                                    <option selected="true">NO</option>
+                                    <option>YES</option>
+                                </select>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label for="diabetes-sh">Slow Healing</label>
-                                <input type="text" class="form-control" id="diabetes-sh" placeholder="Enter Slow Healing" name="slh" required="true"/>
+                                <select class="form-control" id="diabetes-slh" name="slh" required="true" onchange="checkOptions('diabetes-slh');">
+                                    <option selected="true">NO</option>
+                                    <option>YES</option>
+                                </select>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                             <div class="col form-group">
                                 <label for="diabetes-wl">Weight Loss</label>
-                                <input type="text" class="form-control" id="diabetes-wl" placeholder="Enter Weight Loss" name="wl" required="true"/>
+                                <select class="form-control" id="diabetes-wl" name="wl" required="true" onchange="checkOptions('diabetes-wl');">
+                                    <option selected="true">NO</option>
+                                    <option>YES</option>
+                                </select>
                                 <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem assumenda pariatur hic..</small>
                             </div>
                         </div>
@@ -139,24 +151,76 @@ function validateForm(event){
     var age = document.getElementById('diabetes-age').value;
     var bp = document.getElementById('diabetes-bp').value;
     var glu = document.getElementById('diabetes-glu').value;
-    var fru = document.getElementById('diabetes-fru').value;
-    var blv = document.getElementById('diabetes-blv').value;
-    var sh = document.getElementById('diabetes-sh').value;
-    var wl = document.getElementById('diabetes-wl').value;
-
-    if (!age || age <= 0) {
-        alert('Please enter a valid age.');
-        return false;
+    var fru = document.getElementById('diabetes-fru').value=='NO'?0:1;
+    var blv = document.getElementById('diabetes-blv').value=='NO'?0:1;
+    var sh = document.getElementById('diabetes-slh').value=='NO'?0:1;
+    var wl = document.getElementById('diabetes-wl').value=='NO'?0:1;
+    if((name, age, bp, glu) != ''){
+        if(
+            system.validUserName(name) && 
+            system.validLimit([4,100],system.dobToage(age)) && 
+            system.validLimit([70,180],bp) && 
+            system.validLimit([80,180],glu) && 
+            system.validOptions([0,1],fru) && 
+            system.validOptions([0,1],blv) && 
+            system.validOptions([0,1],sh) && 
+            system.validOptions([0,1],wl) 
+        ){
+            window.location.href = `/diabetes/predict?name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`;
+            return true;
+        }else{
+            alert("Please fill with correct values!");
+        }
+    }else{
+        alert("Please fill out the required fileds!");
     }
-    
-    window.location.href = `/diabetes/predict?name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`;
-    return true;
+    return false;
 }
-function validName(id){
+function checkName(id){
     if(document.getElementById(id).value == ''){
         document.getElementById(id).style.borderColor = "#ced4da";
     }else{
-        if(validUserName(document.getElementById(id).value)){
+        if(system.validUserName(document.getElementById(id).value)){
+            document.getElementById(id).style.borderColor = "Green";
+        }else{
+            document.getElementById(id).style.borderColor = "Red";
+        }
+    }
+}
+function checkRange(id,max,min){
+    if(document.getElementById(id).value == ''){
+        document.getElementById(id).style.borderColor = "#ced4da";
+    }else{
+        if(system.validLimit([min,max],document.getElementById(id).value)){
+            document.getElementById(id).style.borderColor = "Green";
+        }else{
+            document.getElementById(id).style.borderColor = "Red";
+        }
+    }
+}
+function checkOptions(id){
+    if(document.getElementById(id).value == ''){
+        document.getElementById(id).style.borderColor = "#ced4da";
+    }else{
+        let options = [];
+        let a = document.getElementById(id);
+        for(let i=0; i<a.childNodes.length; i++){
+            if(a.childNodes[i].value != undefined){
+                options.push(a.childNodes[i].value);
+            }
+        }
+        if(system.validOptions(options,document.getElementById(id).value)){
+            document.getElementById(id).style.borderColor = "Green";
+        }else{
+            document.getElementById(id).style.borderColor = "Red";
+        }
+    }
+}
+function checkAge(id,max,min){
+    if(document.getElementById(id).value == ''){
+        document.getElementById(id).style.borderColor = "#ced4da";
+    }else{
+        if(system.validLimit([min,max],system.dobToage(document.getElementById(id).value))){
             document.getElementById(id).style.borderColor = "Green";
         }else{
             document.getElementById(id).style.borderColor = "Red";
