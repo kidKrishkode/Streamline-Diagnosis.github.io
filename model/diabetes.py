@@ -11,6 +11,7 @@ import ast
 #     {"age": 21, "bp": 133, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 0, "diabetes": 0},
 #     {"age": 24, "bp": 110, "glu": 89, "fru": 1, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
 #     {"age": 26, "bp": 147, "glu": 117, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
+#     {"age": 33, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0},
 #     {"age": 34, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
 #     {"age": 34, "bp": 132, "glu": 120, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1},
 #     {"age": 34, "bp": 130, "glu": 117, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},

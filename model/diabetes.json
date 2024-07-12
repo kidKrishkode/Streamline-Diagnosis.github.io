@@ -1,1 +1,21 @@
-[{"age": 20, "bp": 140, "glu": 150, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 21, "bp": 150, "glu": 180, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 21, "bp": 133, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 0, "diabetes": 0}, {"age": 24, "bp": 110, "glu": 89, "fru": 1, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 26, "bp": 147, "glu": 117, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 32, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 33, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 34, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 34, "bp": 132, "glu": 120, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 34, "bp": 130, "glu": 117, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0}, {"age": 36, "bp": 130, "glu": 120, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0}, {"age": 36, "bp": 110, "glu": 109, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0}, {"age": 43, "bp": 138, "glu": 154, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 46, "bp": 148, "glu": 118, "fru": 1, "blv": 0, "sh": 0, "wl": 0, "diabetes": 1}, {"age": 51, "bp": 127, "glu": 130, "fru": 1, "blv": 1, "sh": 0, "wl": 0, "diabetes": 1}, {"age": 55, "bp": 133, "glu": 108, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1}, {"age": 68, "bp": 95, "glu": 114, "fru": 1, "blv": 1, "sh": 0, "wl": 1, "diabetes": 1}, {"age": 72, "bp": 103, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 77, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 87, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0}, {"age": 87, "bp": 90, "glu": 169, "fru": 0, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1}]
+[
+    {"age": 20, "bp": 140, "glu": 150, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 21, "bp": 150, "glu": 180, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 21, "bp": 133, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 0, "diabetes": 0},
+    {"age": 24, "bp": 110, "glu": 89, "fru": 1, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
+    {"age": 26, "bp": 147, "glu": 117, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 33, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0},
+    {"age": 34, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
+    {"age": 34, "bp": 132, "glu": 120, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 34, "bp": 130, "glu": 117, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
+    {"age": 36, "bp": 130, "glu": 120, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
+    {"age": 36, "bp": 110, "glu": 109, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
+    {"age": 43, "bp": 138, "glu": 154, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 46, "bp": 148, "glu": 118, "fru": 1, "blv": 0, "sh": 0, "wl": 0, "diabetes": 1},
+    {"age": 51, "bp": 127, "glu": 130, "fru": 1, "blv": 1, "sh": 0, "wl": 0, "diabetes": 1},
+    {"age": 55, "bp": 133, "glu": 108, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
+    {"age": 68, "bp": 95, "glu": 114, "fru": 1, "blv": 1, "sh": 0, "wl": 1, "diabetes": 1},
+    {"age": 72, "bp": 103, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0},
+    {"age": 87, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
+    {"age": 87, "bp": 90, "glu": 169, "fru": 0, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1 }
+]
