@@ -90,7 +90,7 @@ function callPythonProcess(list, functionValue){
 }
 
 app.get('*', (req, res) => {
-    res.status(404).send({message: "No page found!"});
+    res.status(404).render('notfound',{error: 404, message: "Page not found on this url, check the source or report it"});
 });
 
 server.listen(PORT, (err) => {
