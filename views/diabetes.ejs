@@ -118,21 +118,6 @@
                         <button class="btn btn-info" type="submit">Process</button>
                     </div>
                 </form>
-            <% if (typeof result !== 'undefined'){ %>
-                <div class="blbg" style="height: 100%;">
-                    <div class="result-diagnosis">
-                        <h2>Diabetes Diagnosis</h2>
-                        <hr>
-                        <h6>Pasent Name: <%= name %></h6>
-                        <h6>Result: <%= result.value==0?'No':'Yes' %></h6>
-                        <small class="form-text text-muted">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae expedita officiis culpa amet temporibus quis veritatis quod rerum et est!</small>
-                        <hr>
-                        <div class="button-group condition-btn">
-                            <button class="btn btn-danger" type="clear" onclick="route('./');">Back</button>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
             </div>
             <div class="home-body-right">
                 <div class="image">
@@ -142,9 +127,75 @@
         </div>
     </section>
     <section class="workspace blbg" id="side-menu" onclick="navbar_toggle();"></section>
+    <% if (typeof result !== 'undefined'){ %>
+        <section class="workspace modal fade" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header"><div class="time">14/07/2024 15:30</div></div>
+                <div id="batch" style="background-image: url('../images/doc1.png');"></div>
+                <div class="modal-info">
+                    <h4 id="level">Diagnosis Report</h4>
+                    <div class="flo">
+                        <p>
+                            <span>Diagnosis Name: </span><br>
+                            <span>Diagnosis Type: </span><br>
+                            <span>Pasent Name: </span><br>
+                            <span>Pasent Age: </span><br>
+                            <span>Pasent Gender: </span><br>
+                        </p>
+                        <p>
+                            Diabetes<br>
+                            Predict<br>
+                            <%= name %><br>
+                            <%= age %><br>
+                            Male<br>
+                        </p>
+                    </div>
+                </div>
+                <hr class="divider">
+                <div class="modal-body">
+                    <div class="flo">
+                        <p>
+                            <span>Blood Pressure: </span><br>
+                            <span>Glucose Level: </span><br>
+                            <span>Frequent Urination: </span><br>
+                            <span>Blurred Vision: </span><br>
+                            <span>Slow Healing: </span><br>
+                            <span>Weight Loss: </span><br>
+                        </p>
+                        <p>
+                            <%= bp %> mmHg<br>
+                            <%= glu %> mg/dL<br>
+                            <%= fru==0?'No':'Yes' %><br>
+                            <%= blv==0?'No':'Yes' %><br>
+                            <%= slh==0?'No':'Yes' %><br>
+                            <%= wl==0?'No':'Yes' %><br>
+                        </p>
+                    </div>
+                    <hr class="divider">
+                    <div class="flo">
+                        <p class="wd-lg">
+                            <span>Result: </span><%= result.value==0?'Negative (No Diabetes Detected)':'Positive (Diabetes Detected)' %><br>
+                        </p>
+                    </div>
+                    <small class="text-muted form-text">This Report data is machine generated, please always consult with your doctor before take any step.</small>
+                    <hr class="divider">
+                    <div class="flo">
+                        <img src="../images/diabetes.png" alt="loading.."/>
+                        <img src="../images/shape1.png" alt="loading.."/>
+                        <img src="../images/diabetes.png" alt="loading.."/>
+                        <img src="../images/shape1.png" alt="loading.."/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" type="clear" onclick="route('./');">Back</button>
+                </div>
+            </div>
+        </section>
+    <% } %>
 </body>
 <script src="../public/App.js"></script>
 <script>
+document.querySelector(".time").textContent = `${(new Date().getDate())<10?'0'+(new Date().getDate()):(new Date().getDate())}/${(new Date().getMonth()+1)<10?'0'+(new Date().getMonth()+1):(new Date().getMonth()+1)}/${(new Date().getFullYear())<10?'0'+(new Date().getFullYear()):(new Date().getFullYear())} ${(new Date().getHours())<10?'0'+(new Date().getHours()):(new Date().getHours())}:${(new Date().getMinutes())<10?'0'+(new Date().getMinutes()):(new Date().getMinutes())}`;
 function validateForm(event){
     event.preventDefault();
     var name = document.getElementById('diabetes-name').value;
