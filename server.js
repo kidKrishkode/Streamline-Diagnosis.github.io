@@ -45,7 +45,7 @@ app.get('/diabetes/predict', async (req, res) => {
         const listOfInput = [age, bp, glu, fru, blv, slh, wl];
         if(listOfInput.length > 0){
             await callPythonProcess(listOfInput, 'diabetes').then(result => {
-                res.status(200).render('diabetes',{name, result});
+                res.status(200).render('diabetes',{name, age, bp, glu, fru, blv, slh, wl, result});
             }).catch(error => {
                 console.error('Error:', error.message);
             });
