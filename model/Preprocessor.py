@@ -22,6 +22,21 @@ def normalize(filname):
     with open(filname, 'w') as f:
         json.dump(normalize_db, f)
 
+def accuracy(*args):
+    try:
+        if len(args) == 3:
+            dataset, exp, FN = args
+            TP = len(dataset) or exp
+            TN, FP = 0, 0
+        elif len(args) == 4:
+            TP, TN, FP, FN = args
+        else:
+            raise ValueError("Invalid number of arguments")
+        accuracy = (int(TP) + int(TN)) / (int(TP) + int(TN) + int(FP) + int(FN))
+        return int(accuracy * 100)
+    except:
+        return None
+
 def ETL(inputs, outputs, json_file_path):
     try:
         with open(json_file_path, 'r') as f:

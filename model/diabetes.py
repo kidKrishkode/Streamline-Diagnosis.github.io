@@ -4,28 +4,18 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import Preprocessor
 import ast
+import logging
 
-# [
-#     {"age": 20, "bp": 140, "glu": 150, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 21, "bp": 150, "glu": 180, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 21, "bp": 133, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 0, "diabetes": 0},
-#     {"age": 24, "bp": 110, "glu": 89, "fru": 1, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
-#     {"age": 26, "bp": 147, "glu": 117, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 33, "bp": 120, "glu": 85, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0},
-#     {"age": 34, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
-#     {"age": 34, "bp": 132, "glu": 120, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 34, "bp": 130, "glu": 117, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
-#     {"age": 36, "bp": 130, "glu": 120, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
-#     {"age": 36, "bp": 110, "glu": 109, "fru": 0, "blv": 0, "sh": 0, "wl": 0, "diabetes": 0},
-#     {"age": 43, "bp": 138, "glu": 154, "fru": 1, "blv": 0, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 46, "bp": 148, "glu": 118, "fru": 1, "blv": 0, "sh": 0, "wl": 0, "diabetes": 1},
-#     {"age": 51, "bp": 127, "glu": 130, "fru": 1, "blv": 1, "sh": 0, "wl": 0, "diabetes": 1},
-#     {"age": 55, "bp": 133, "glu": 108, "fru": 1, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1},
-#     {"age": 68, "bp": 95, "glu": 114, "fru": 1, "blv": 1, "sh": 0, "wl": 1, "diabetes": 1},
-#     {"age": 72, "bp": 103, "glu": 97, "fru": 0, "blv": 1, "sh": 0, "wl": 1, "diabetes": 0},
-#     {"age": 87, "bp": 120, "glu": 90, "fru": 0, "blv": 0, "sh": 0, "wl": 1, "diabetes": 0},
-#     {"age": 87, "bp": 90, "glu": 169, "fru": 0, "blv": 1, "sh": 1, "wl": 1, "diabetes": 1 }
-# ]
+def accuracy():
+    if './model/main.py' in sys.argv[0]:
+        json_file_path = './model/diabetes.json'
+    else:
+        json_file_path = './diabetes.json'
+
+    with open(json_file_path) as f:
+        dataset = json.load(f)
+
+    return Preprocessor.accuracy(dataset, None, 2)
 
 def predict_diabetes(input_list):
 
@@ -56,8 +46,11 @@ def predict_diabetes(input_list):
     y = np.array([target['diabetes'] for target in dataset]).reshape(1, -1)
 
     # Train a K-Nearest Neighbors classifier
-    knn = KNeighborsClassifier(n_neighbors=5)
+    knn = KNeighborsClassifier(n_neighbors=len(dataset)-1)
     knn.fit(X, y)
+
+    # Predict the loss conjuction of the plane
+    # actual = knn.predict(np.array([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss]).reshape(1, -1))
     
     if age >= 80:
         bp_target = 150
@@ -82,10 +75,12 @@ def predict_diabetes(input_list):
     
     Preprocessor.ETL([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss],[assumtion],json_file_path)
 
-    return assumtion
+    if accuracy() > 75:
+        return assumtion
+    else:
+        return None
 
 def diabetes_report(user_input):
-    # print(user_input)
     result = predict_diabetes(user_input)
     return result
 
@@ -94,8 +89,7 @@ def main():
         print("Usage: diabetes.py <list-value>")
         return
     
-    input_list = json.loads(sys.argv[1])
-    # input_list = ast.literal_eval(sys.argv[1])
+    input_list = ast.literal_eval(sys.argv[1])
     result = diabetes_report(input_list)
     result = {"diabetes": result}
     print(result)
