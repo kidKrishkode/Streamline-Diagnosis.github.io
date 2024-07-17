@@ -1,0 +1,44 @@
+{
+  "short_name": "Streamline Diagnosis",
+  "name": "Create JPEN Web Sample",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "1500x1500 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo1500.png",
+      "type": "image/png",
+      "sizes": "1500x1500"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#22577aff",
+  "background_color": "#ffffff",
+  "Related-diagnosis": [
+    {"name": "Diabetes", "link": "./diabetes", "related": ["Kidney Stone", "High Blood Pressure", "Heart Disease"]},
+    {"name": "Breast Cancer", "link": "./", "related": ["Diabetes", "High Blood Pressure", "Heart Disease", "Asthma"]},
+    {"name": "Kidney Stone", "link": "./", "related": ["Diabetes", "High Blood Pressure", "Urinary Tract Infection"]},
+    {"name": "High Blood Pressure", "link": "./", "related": ["Diabetes", "Kidney Stone", "Heart Disease"]},
+    {"name": "Heart Disease", "link": "./", "related": ["Diabetes", "High Blood Pressure", "High Cholesterol"]},
+    {"name": "High Cholesterol", "link": "./", "related": ["Heart Disease", "High Blood Pressure", "Atherosclerosis"]},
+    {"name": "Asthma", "link": "./", "related": ["Chronic Obstructive Pulmonary Disease", "Diabetes", "Allergic Rhinitis", "Eczema"]},
+    {"name": "Chronic Obstructive Pulmonary Disease", "link": "./", "related": ["Asthma", "Emphysema", "Bronchitis"]},
+    {"name": "Emphysema", "link": "./", "related": ["Chronic Obstructive Pulmonary Disease", "Asthma", "Bronchitis"]},
+    {"name": "Bronchitis", "link": "./", "related": ["Chronic Obstructive Pulmonary Disease", "Asthma", "Pneumonia"]},
+    {"name": "Pneumonia", "link": "./", "related": ["Bronchitis", "Asthma", "Diabetes", "Respiratory Syncytial Virus"]},
+    {"name": "Respiratory Syncytial Virus", "link": "./", "related": ["Pneumonia", "Bronchitis", "Asthma"]},
+    {"name": "Hepatitis", "link": "./", "related": ["Liver Cirrhosis", "Liver Cancer", "Alcoholic Liver Disease"]},
+    {"name": "Liver Cirrhosis", "link": "./", "related": ["Hepatitis", "Liver Cancer", "Alcoholic Liver Disease"]},
+    {"name": "Liver Cancer", "link": "./", "related": ["Hepatitis", "Liver Cirrhosis", "Alcoholic Liver Disease"]},
+    {"name": "Alcoholic Liver Disease", "link": "./", "related": ["Hepatitis", "Liver Cirrhosis", "Liver Cancer"]},
+    {"name": "Rheumatoid Arthritis", "link": "./", "related": ["Osteoarthritis", "Psoriatic Arthritis", "Lupus"]},
+    {"name": "Osteoarthritis", "link": "./", "related": ["Rheumatoid Arthritis", "Psoriatic Arthritis", "Gout"]},
+    {"name": "Psoriatic Arthritis", "link": "./", "related": ["Rheumatoid Arthritis", "Osteoarthritis", "Gout"]},
+    {"name": "Lupus", "link": "./", "related": ["Rheumatoid Arthritis", "Psoriatic Arthritis", "Antiphospholipid Syndrome"]},
+    {"name": "Gout", "link": "./", "related": ["Rheumatoid Arthritis", "Osteoarthritis", "Psoriatic Arthritis"]}
+  ]
+}
+  
