@@ -35,10 +35,29 @@
 			</button>
         </nav>
 	</header>
-    <section class="workspace">
-        <a href="./diabetes"><button class="btn btn-info">Diabetes Test</button></a>
+    <section class="workspace" id="diagnosis">
+        <div class="searchBox">
+            <div class="searchBar">
+                <div class="searchText">
+                    <input type="text" placeholder="Search Streamline Diagnosis" id="searchData" onkeyup="search_product('searchData','drop');">
+                </div>
+                <div class="searchIcon" title="Manually search diagnosis">
+                    <i class="fa fa-search"></i> Search
+                </div>
+            </div>
+        </div>
+        <ol class="search-product-data" id="productList">
+            <%= productList %>
+        </ol>
     </section>
     <section class="workspace blbg" id="side-menu" onclick="navbar_toggle();"></section>
 </body>
 <script src="../public/App.js"></script>
+<script>
+try{
+    document.getElementById("productList").innerHTML = document.getElementById("productList").textContent;
+}catch(e){
+    console.log("");
+}
+</script>
 </html>
