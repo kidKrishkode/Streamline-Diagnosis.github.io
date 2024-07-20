@@ -13,7 +13,7 @@ const app = express();
 let server = http.createServer(app);
 const PORT = process.env.PORT || 5500;
 const AppName = "Streamline Diagnosis";
-let web;
+let web = new WEB(PORT);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -29,8 +29,9 @@ app.get('/', (req, res) => {
     res.status(200).render('index');
 });
 
-app.get('/diagnosis', (req, res) => {
-    res.status(200).render('diagnosis');
+app.get('/diagnosis', async (req, res) => {
+    productList = await web.ProductListMaker();
+    res.status(200).render('diagnosis',{productList});
 });
 
 app.get('/diabetes', (req, res) => {
@@ -127,9 +128,44 @@ WEB.prototype.getRelatedDiagnosis = function(relationName){
     });
     let layout='';
     for(let i=0; i<relatedDiagnoses.length; i++){
-        layout += `<li onclick="route('${relatedDiagnoses[i].link}');">${relatedDiagnoses[i].name}</li>`;
+        layout += `<li onclick="route('${relatedDiagnoses[i].link}');" title="${relatedDiagnoses[i].name}">${relatedDiagnoses[i].name}</li>`;
     }
     return layout;
+}
+
+WEB.prototype.ProductListMaker = async function(){
+    const data = jsonfile.readFileSync('./public/manifest.json');
+    const productLib = [];
+    data['Related-diagnosis'].forEach(diagnosis => {
+        productLib.push(diagnosis);
+    });
+    let productList='';
+    let new_productLib = web.productSwapper(productLib);
+    for(let i=0; i<new_productLib.length; i++){
+        productList += await web.productCardMaker(i,new_productLib);
+    }
+    return productList;
+}
+
+WEB.prototype.productSwapper = function(productLib){
+    for(let i=0; i<productLib.length; i++){
+        let id = Math.floor(Math.random()*productLib.length);
+        let a = productLib[i];
+        productLib[i] = productLib[id];
+        productLib[id] = a;
+    }
+    return productLib;
+}
+
+WEB.prototype.productCardMaker = async function(id,productLib){
+    if(id<=productLib.length && id>=0){
+        let card = productLib[id].valueOf();
+        let name = card.name, desc = card.desc, link = card.link, img = card.img=='#'?'../images/shape2.gif':card.img;
+        const layout = await ejs.renderFile('./views/card.ejs',{name, desc, img, link});
+        return (layout.toString());
+    }else{
+        return null;
+    }
 }
 
 function callPythonProcess(list, functionValue){
@@ -168,7 +204,6 @@ app.get('*', (req, res) => {
 
 server.listen(PORT, (err) => {
     if(err) console.log("Oops an error occure:  "+err);
-    web = new WEB(PORT);
     console.log(`Compiled successfully!\n\nYou can now view \x1b[33m./${path.basename(__filename)}\x1b[0m in the browser.`);
     console.info(`\thttp://localhost:${PORT}`);
     console.log("\n\x1b[32mNode web compiled!\x1b[0m \n");
