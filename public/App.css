@@ -473,6 +473,149 @@ footer{
     opacity: 0.7;
     margin: 5px auto;
 }
+.searchBox{
+    margin: 20px 0px;
+    width: 100%;
+    background-color: transparent;
+    text-align: center;
+}
+.searchBar{
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+    margin: 0px 25%;
+    background-color: transparent;
+}
+.searchText{
+    width: 80%;
+    border: 2px solid var(--heading-color);
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+.searchText input{
+    outline: none;
+    width: 100%;
+    height: 100%;
+    padding: 2px 15px;
+    border: none;
+    border-top-left-radius: 200px;
+    border-bottom-left-radius: 200px;
+}
+.searchIcon{
+    width: 20%;
+    padding: 6px 0px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    background: var(--verdigris);
+    color: #fff;
+    border: 2px solid var(--heading-color);
+    cursor: pointer;
+}
+.searchIcon:hover{
+    background: #17a2b8;
+}
+.search-product-data,.search-user-data{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0%;
+    max-height: 600px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #00ff261c transparent;
+}
+.drop,.drops{
+    width: 30%;
+    margin: 0px;
+    display: list-item;
+}
+.drops{
+    width: 100%;
+    margin: 0px;
+}
+.product{
+    width: 100%;
+    margin: 20px auto;
+    background: #fff;
+    box-shadow: 0px 0px 4px 1px grey;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    transition: 1s ease-in-out;
+}
+.product:hover{
+    cursor: pointer;
+    box-shadow: 0px 0px 10px 2px #b7d2ee;
+    transform: translateY(-10px);
+}
+.product-component-top{
+    margin: 0%;
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: url('../images/');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+.product-component-top .product-price{
+    width: 90px;
+    height: 24px;
+    padding: 2px 4px;
+    border-radius: 8px;
+    color: var(--verdigris);
+    font-size: 14px;
+    font-family: sans-serif;
+    text-align: center;
+    font-weight: 600;
+    background: var(--bg-color);
+    position: relative;
+    top: 10px;
+    left: 75%;
+    transition: 2s ease-in-out;
+}
+.product-component-middle{
+    margin: 0%;
+    width: 100%;
+    height: 50%;
+    padding: 8px 10px;
+    padding-bottom: 2px;
+}
+.product-component-middle .product-head{
+    font-weight: bold;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: var(--heading-color);
+    width: 90%;
+    height: 28px;
+    max-height: 28px;
+    text-align: left;
+    margin: auto 0px;
+    overflow: hidden;
+}
+.product-component-middle .product-description{
+    font-size: 14px;
+    text-align: justify;
+    color: gray;
+    font-family: sans-serif;
+    height: calc(14px* 6);
+    max-height: calc(14px* 6);
+    overflow: hidden;
+}
+.product-component-bottom{
+    margin: 0%;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 5px 0px 15px 0px;
+    font-size: 16px;
+    font-family: Consolas, 'Courier New', monospace;
+}
+
 
 @media only screen and (max-width: 900px){
     .navbar img{
@@ -548,6 +691,38 @@ footer{
     .modal-info{
         width: 75%;
         margin-left: 25%;
+    }
+    .searchBar{
+        width: 95%;
+        margin: 0px auto;
+        overflow: hidden;
+    }
+    .searchIcon{
+        width: 25%;
+    }
+    .search-product-data{
+        margin: auto 0;
+        padding: 0;
+        max-height: 500px;
+        display: flex;
+        justify-content: space-around;
+        padding: 0%;
+    }
+    .drop{
+        width: 100%;
+    }
+    .product {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .product-component-middle .product-description{
+        margin: 0px;
+        width: 100%;
+    }
+    .product-component-top .product-price{
+        position: relative;
+        left: 70%;
+        margin: 0%;
     }
 }
   
