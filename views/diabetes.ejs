@@ -170,7 +170,7 @@ function validateForm(event){
             system.validOptions([0,1],sh) && 
             system.validOptions([0,1],wl) 
         ){
-            window.location.href = `/diabetes/predict?name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`;
+            window.location.href = system.encodedURI("/diabetes/predict",`name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`,13);
             return true;
         }else{
             alert("Please fill with correct values!");
