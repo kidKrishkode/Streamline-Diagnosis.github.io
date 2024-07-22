@@ -17,6 +17,8 @@
   "display": "standalone",
   "theme_color": "#22577aff",
   "background_color": "#ffffff",
+  "hash": [["0","*z"],["1","*y"],["2","*x"],["3","*w"],["4","*v"],["5","*u"],["6","*t"],["7","*s"],["8","*r"],["9","*q"],["&",0],["+",1],["=",2],["-",3],["a",4],["e",5],["i",6],["n",7],["u",8],["g",9]],
+  "antihash": [["&",0],["+",1],["=",2],["-",3],["a",4],["e",5],["i",6],["n",7],["u",8],["g",9],["0","*z"],["1","*y"],["2","*x"],["3","*w"],["4","*v"],["5","*u"],["6","*t"],["7","*s"],["8","*r"],["9","*q"]],
   "Related-diagnosis": [
     {"name": "Diabetes", "img": "../images/diabetes.png", "link": "./diabetes", "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, ducimus. Culpa soluta hic itaque debitis natus repudiandae inventore excepturi provident omnis quisquam qui nisi, temporibus porro alias corrupti iste fugit? Fuga nostrum", "related": ["Kidney Stone", "High Blood Pressure", "Heart Disease"]},
     {"name": "Breast Cancer", "img": "../images/breast_cancer.jpg", "link": "./", "desc": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam, ducimus. Culpa soluta hic itaque debitis natus repudiandae inventore excepturi provident omnis quisquam qui nisi, temporibus porro alias corrupti iste fugit? Fuga nostrum", "related": ["Diabetes", "High Blood Pressure", "Heart Disease", "Asthma"]},
