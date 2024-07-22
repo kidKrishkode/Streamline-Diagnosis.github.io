@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const {spawn} = require('child_process');
 const exec = require('child_process').exec;
+const querystring = require('querystring');
 const ejs = require('ejs');
 const jsonfile = require('jsonfile');
 require('./public/App.test.js');
@@ -17,13 +18,37 @@ let web = new WEB(PORT);
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/images',express.static(path.join(__dirname,'images')));
 app.use('/public',express.static(path.join(__dirname,'public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+    try{
+        const url = req.originalUrl;
+        const query = url.split('?')[1];
+        const params = (new URL(path.join(__dirname, url))).searchParams;
+        const public_key = 13;
+        if(params.has('encode')){
+            if(query!=undefined){
+                const decodedUrl = web.decodedURI(query.replace('encode=',''), public_key);
+                req.url = `${url.split('?')[0]}?${decodedUrl}`;
+                req.query = querystring.parse(decodedUrl);
+            }
+        }else{
+            if(query!=undefined){
+                const encodedUrl = web.encodedURI(query, public_key);
+                req.url = `${url}?encode=${encodedUrl}`;
+                req.query = querystring.parse(encodedUrl);
+            }
+        }
+        next();
+    }catch(e){
+        res.status(401).render('notfound',{error: 401, message: "Unauthorize entry not allow, check the source or report it"});
+    }
+});
 
 app.get('/', (req, res) => {
     res.status(200).render('index');
@@ -41,6 +66,9 @@ app.get('/diabetes', (req, res) => {
 });
 
 app.get('/diabetes/predict', async (req, res) => {
+    if(req.query.encode!=undefined){
+        res.redirect('*');
+    }
     try{
         const name = req.query.name;
         const age = web.getAge(req.query.age);
@@ -75,6 +103,8 @@ function WEB(port){
     this.active = true;
     this.port = port;
     this.filename = path.basename(__filename);
+    this.hash = jsonfile.readFileSync('./public/manifest.json')['hash'];
+    this.antihash = jsonfile.readFileSync('./public/manifest.json')['antihash'];
 }
 
 WEB.prototype.getAge = function(time){
@@ -166,6 +196,21 @@ WEB.prototype.productCardMaker = async function(id,productLib){
     }else{
         return null;
     }
+}
+
+WEB.prototype.encodedURI = function(url, key){
+    let str = url.toString().toLowerCase();
+    for(let i=0; i<web.hash.length; i++){
+        str = str.replaceAll(web.hash[i][0], web.hash[i][1]);
+    }
+    return str.toString();
+}
+WEB.prototype.decodedURI = function(url, key){
+    let str = url.toString().toLowerCase();
+    for(let i=0; i<web.antihash.length; i++){
+        str = str.replaceAll(web.antihash[i][1], web.antihash[i][0]);
+    }
+    return str.toString();
 }
 
 function callPythonProcess(list, functionValue){
