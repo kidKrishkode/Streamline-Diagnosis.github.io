@@ -112,11 +112,11 @@ app.get('/breastCancer/predict', async (req, res) => {
     try{
         const name = req.query.name;
         const age = web.getAge(req.query.age);
-        const tuS = req.query.tuS * 1;
-        const brP = req.query.brP * 1;
-        const blD = req.query.blD * 1;
-        const sC = req.query.sC * 1;
-        const fH = req.query.fH * 1;
+        const tuS = req.query.tus * 1;
+        const brP = req.query.brp * 1;
+        const blD = req.query.bld * 1;
+        const sC = req.query.sc * 1;
+        const fH = req.query.fh * 1;
         const listOfInput = [age, tuS, brP, blD, sC, fH];
         if(listOfInput.length > 0){
             let new_brP = brP==0?'No':'Yes';
@@ -125,7 +125,7 @@ app.get('/breastCancer/predict', async (req, res) => {
             let new_fH = fH==0?'No':'Yes';
             let feature = web.featureLayout(['Tumor Size', 'Breast Pain', 'Blood Discharge', 'Shape Change', 'Family History'],[tuS, new_brP, new_blD, new_sC, new_fH],['cm',null,null,null,null]);
             await callPythonProcess(listOfInput, 'breastCancer').then(results => {
-                const result = web.targetLayout(['Result','Type'],[results.value==0?'Negative (No Tumor Detected)':'Positive (Tumor Detected)',results.type]);
+                const result = web.targetLayout(['Result','Type'],[results.value==0?'Negative (No Tumor Detected)':'Positive (Tumor Detected)',results.type==""?"Null":results.type]);
                 ejs.renderFile('./views/output.ejs',{name, age, feature, result}).then(layout => {
                     res.status(200).render('breastCancer',{layout});
                 });
