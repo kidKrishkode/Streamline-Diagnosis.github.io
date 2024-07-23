@@ -1,41 +1,26 @@
 import sys
 import json
+import Preprocessor
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
-import Preprocessor
+from sklearn.preprocessing import StandardScaler
+import ast
+import logging
 
-# [
-#     {"age": 17, "tuS": 0, "brP": 0, "blD": 0, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 21, "tuS": 1, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 21, "tuS": 0, "brP": 0, "blD": 0, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 23, "tuS": 3, "brP": 1, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
-#     {"age": 24, "tuS": 3, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
-#     {"age": 34, "tuS": 2, "brP": 1, "blD": 1, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 35, "tuS": 0, "brP": 0, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
-#     {"age": 37, "tuS": 1, "brP": 0, "blD": 0, "sC": 0, "fH": 1, "breastCancer": 0, "type": ""},
-#     {"age": 39, "tuS": 1, "brP": 0, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 42, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
-#     {"age": 42, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 43, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 43, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T4"},
-#     {"age": 46, "tuS": 4, "brP": 0, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
-#     {"age": 46, "tuS": 6, "brP": 1, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T3"},
-#     {"age": 48, "tuS": 2, "brP": 0, "blD": 1, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T1"},
-#     {"age": 50, "tuS": 3, "brP": 1, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
-#     {"age": 51, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
-#     {"age": 51, "tuS": 0, "brP": 0, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
-#     {"age": 52, "tuS": 6, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T3"},
-#     {"age": 53, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 1, "type": "T2"},
-#     {"age": 54, "tuS": 4, "brP": 0, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
-#     {"age": 56, "tuS": 2, "brP": 0, "blD": 1, "sC": 0, "fH": 1, "breastCancer": 1, "type": "T1"},
-#     {"age": 67, "tuS": 2, "brP": 0, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T1"},
-#     {"age": 67, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 1, "type": "T2"},
-#     {"age": 78, "tuS": 5, "brP": 1, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T2"},
-#     {"age": 84, "tuS": 2, "brP": 1, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T1" }
-# ]
+def accuracy():
+    if './model/main.py' in sys.argv[0]:
+        json_file_path = './model/breastCancer.json'
+    else:
+        json_file_path = './breastCancer.json'
+
+    with open(json_file_path) as f:
+        dataset = json.load(f)
+
+    return Preprocessor.accuracy(dataset, None, 2)
 
 def predict_breast_cancer(input_list):
 
+    # Access the level dataset from json file
     try:
         if './model/main.py' in sys.argv[0]:
             json_file_path = './model/breastCancer.json'
@@ -62,9 +47,18 @@ def predict_breast_cancer(input_list):
     X = np.array([[data['age'], data['tuS'], data['brP'], data['blD'], data['sC'], data['fH']] for data in dataset]).reshape(1, -1)
     y = np.array([[target['breastCancer'], target['type']] for target in dataset]).reshape(1, -1)
 
+    # Scale feature using StandardScaler
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X.reshape(-1, 6))
+
     # Train a K-Nearest Neighbors classifier
     knn = KNeighborsClassifier(n_neighbors=5)
-    knn.fit(X, y)
+    knn.fit(X_scaled, y.reshape(-1, 2))
+
+    # Predict the loss conjuction of the plane
+    unknown_input = np.array([age, tumor_size, breast_pain, blood_discharge, shape_change, family_history]).reshape(1,-1)
+    unknown_input_scaled  = scaler.transform(unknown_input)
+    actual = knn.predict(unknown_input_scaled)[0]
 
     # Risk analysis using user age
     if age >= 45:
@@ -95,17 +89,23 @@ def predict_breast_cancer(input_list):
         symptoms = False
     
     # assuming a random status and modifi the weight
-    assumtion = Preprocessor.assumption
+    assumption = Preprocessor.assumption
 
     # Classfied result return
     if risk > 0.5 and symptoms and tumor_size > 0:
-        assumtion = 1, tumor_type
+        assumption = 1, tumor_type
     else:
-        assumtion = 0, ""
+        assumption = 0, ""
 
-    Preprocessor.ETL([age, tumor_size, breast_pain, blood_discharge, shape_change, family_history],list(assumtion),json_file_path)
+    Preprocessor.ETL([age, tumor_size, breast_pain, blood_discharge, shape_change, family_history],list(assumption),json_file_path)
 
-    return assumtion
+    # Fine the deviation or loss
+    loss_f = Preprocessor.deviation(int(actual[0]), assumption[0])
+
+    if accuracy() > 75 and loss_f < 0.2:
+        return assumption
+    else:
+        return None
 
 def breast_cancer_report(user_input):
     result, tumor = predict_breast_cancer(user_input)
@@ -116,7 +116,7 @@ def main():
         print("Usage: breastCancer.py <list-value>")
         return
     
-    input_list = json.loads(sys.argv[1])
+    input_list = ast.literal_eval(sys.argv[1])
     result, tumor = breast_cancer_report(input_list)
     result = {"cancer": result, "tumor": tumor}
     print(result)
