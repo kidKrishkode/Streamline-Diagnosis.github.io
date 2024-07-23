@@ -4,9 +4,10 @@ import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import Preprocessor
 
-# [   
+# [
 #     {"age": 17, "tuS": 0, "brP": 0, "blD": 0, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 21, "tuS": 1, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
+#     {"age": 21, "tuS": 0, "brP": 0, "blD": 0, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 23, "tuS": 3, "brP": 1, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
 #     {"age": 24, "tuS": 3, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
 #     {"age": 34, "tuS": 2, "brP": 1, "blD": 1, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
@@ -14,6 +15,7 @@ import Preprocessor
 #     {"age": 37, "tuS": 1, "brP": 0, "blD": 0, "sC": 0, "fH": 1, "breastCancer": 0, "type": ""},
 #     {"age": 39, "tuS": 1, "brP": 0, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 42, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
+#     {"age": 42, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 43, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 43, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T4"},
 #     {"age": 46, "tuS": 4, "brP": 0, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 0, "type": ""},
@@ -21,13 +23,15 @@ import Preprocessor
 #     {"age": 48, "tuS": 2, "brP": 0, "blD": 1, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T1"},
 #     {"age": 50, "tuS": 3, "brP": 1, "blD": 0, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
 #     {"age": 51, "tuS": 5, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
+#     {"age": 51, "tuS": 0, "brP": 0, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 0, "type": ""},
 #     {"age": 52, "tuS": 6, "brP": 1, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T3"},
 #     {"age": 53, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 1, "type": "T2"},
 #     {"age": 54, "tuS": 4, "brP": 0, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T2"},
 #     {"age": 56, "tuS": 2, "brP": 0, "blD": 1, "sC": 0, "fH": 1, "breastCancer": 1, "type": "T1"},
 #     {"age": 67, "tuS": 2, "brP": 0, "blD": 1, "sC": 1, "fH": 1, "breastCancer": 1, "type": "T1"},
 #     {"age": 67, "tuS": 3, "brP": 1, "blD": 1, "sC": 0, "fH": 0, "breastCancer": 1, "type": "T2"},
-#     {"age": 84, "tuS": 2, "brP": 1, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T1"}
+#     {"age": 78, "tuS": 5, "brP": 1, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T2"},
+#     {"age": 84, "tuS": 2, "brP": 1, "blD": 0, "sC": 1, "fH": 0, "breastCancer": 1, "type": "T1" }
 # ]
 
 def predict_breast_cancer(input_list):
@@ -91,13 +95,13 @@ def predict_breast_cancer(input_list):
         symptoms = False
     
     # assuming a random status and modifi the weight
-    assumtion = Preprocessor.assumtion
+    assumtion = Preprocessor.assumption
 
     # Classfied result return
     if risk > 0.5 and symptoms and tumor_size > 0:
         assumtion = 1, tumor_type
     else:
-        assumtion = 0, 0
+        assumtion = 0, ""
 
     Preprocessor.ETL([age, tumor_size, breast_pain, blood_discharge, shape_change, family_history],list(assumtion),json_file_path)
 

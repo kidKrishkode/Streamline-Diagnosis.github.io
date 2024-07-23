@@ -2,7 +2,7 @@ import sys
 import json
 import random
 
-assumtion = random.choice([0,1])
+assumption = random.choice([0,1])
 
 def mbr(inputs, json_file_path, output_keys):
     try:
@@ -63,3 +63,10 @@ def ETL(inputs, outputs, json_file_path):
 
     except:
         print('Level data modifing not possible\n')
+
+def deviation(actual, assumption):
+    if (actual <= 1 and actual >= 0) and (assumption <= 1 and assumption >= 0):
+        result = actual - assumption
+    else:
+        result = 1
+    return result

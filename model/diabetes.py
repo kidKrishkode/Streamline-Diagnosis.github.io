@@ -1,8 +1,9 @@
 import sys
 import json
+import Preprocessor
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
-import Preprocessor
+from sklearn.preprocessing import StandardScaler
 import ast
 import logging
 
@@ -19,6 +20,7 @@ def accuracy():
 
 def predict_diabetes(input_list):
 
+    # Access the level dataset from json file
     try:
         if './model/main.py' in sys.argv[0]:
             json_file_path = './model/diabetes.json'
@@ -45,38 +47,48 @@ def predict_diabetes(input_list):
     X = np.array([[data['age'], data['bp'], data['glu'], data['fru'], data['blv'], data['sh'], data['wl']] for data in dataset]).reshape(1, -1)
     y = np.array([target['diabetes'] for target in dataset]).reshape(1, -1)
 
+    # Scale feature using StandardScaler
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X.reshape(-1, 7))
+
     # Train a K-Nearest Neighbors classifier
-    knn = KNeighborsClassifier(n_neighbors=len(dataset)-1)
-    knn.fit(X, y)
+    knn = KNeighborsClassifier(n_neighbors=5)
+    knn.fit(X_scaled, y.reshape(-1))
 
     # Predict the loss conjuction of the plane
-    # actual = knn.predict(np.array([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss]).reshape(1, -1))
+    unknown_input = np.array([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss]).reshape(1,-1)
+    unknown_input_scaled  = scaler.transform(unknown_input)
+    actual = knn.predict(unknown_input_scaled)[0]
     
+    # Tune the weights and find loss function
     if age >= 80:
         bp_target = 150
     else:
         bp_target = 140
     
-    # assuming a random status and modifi the weight
-    assumtion = Preprocessor.assumtion
+    # Assuming a random status and modifi the weight
+    assumption = Preprocessor.assumption
 
     if blood_pressure >= bp_target or glucose_level >= 126 or (glucose_level > 100 and frequent_urination == 1):
         if glucose_level >= 70 and glucose_level <= 100:
-            assumtion = 0
+            assumption = 0
         elif glucose_level > 100 and glucose_level <= 125:
             if frequent_urination == 1 or blurred_vision == 1 or slow_healing == 1 or weight_loss == 1:
-                assumtion = 1
+                assumption = 1
             else:
-                assumtion = 0
+                assumption = 0
         else:
-            assumtion = 1
+            assumption = 1
     else:
-        assumtion = 0
+        assumption = 0
     
-    Preprocessor.ETL([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss],[assumtion],json_file_path)
+    Preprocessor.ETL([age, blood_pressure, glucose_level, frequent_urination, blurred_vision, slow_healing, weight_loss],[assumption],json_file_path)
 
-    if accuracy() > 75:
-        return assumtion
+    # Fine the deviation or loss
+    loss_f = Preprocessor.deviation(actual, assumption)
+
+    if accuracy() > 75 and loss_f < 0.2:
+        return assumption
     else:
         return None
 
