@@ -99,6 +99,44 @@ app.get('/diabetes/predict', async (req, res) => {
     }
 });
 
+app.get('/breastCancer', (req, res) => {
+    const layout = undefined;
+    const relatedDiagnosis = web.getRelatedDiagnosis('Breast Cancer').toString();
+    res.status(200).render('breastCancer',{layout, relatedDiagnosis});
+});
+
+app.get('/breastCancer/predict', async (req, res) => {
+    if(req.query.encode!=undefined){
+        res.redirect('*');
+    }
+    try{
+        const name = req.query.name;
+        const age = web.getAge(req.query.age);
+        const tuS = req.query.tuS * 1;
+        const brP = req.query.brP * 1;
+        const blD = req.query.blD * 1;
+        const sC = req.query.sC * 1;
+        const fH = req.query.fH * 1;
+        const listOfInput = [age, tuS, brP, blD, sC, fH];
+        if(listOfInput.length > 0){
+            let new_brP = brP==0?'No':'Yes';
+            let new_blD = blD==0?'No':'Yes';
+            let new_sC = sC==0?'No':'Yes';
+            let new_fH = fH==0?'No':'Yes';
+            let feature = web.featureLayout(['Tumor Size', 'Breast Pain', 'Blood Discharge', 'Shape Change', 'Family History'],[tuS, new_brP, new_blD, new_sC, new_fH],['cm',null,null,null,null]);
+            await callPythonProcess(listOfInput, 'breastCancer').then(results => {
+                const result = web.targetLayout(['Result','Type'],[results.value==0?'Negative (No Tumor Detected)':'Positive (Tumor Detected)',results.type]);
+                ejs.renderFile('./views/output.ejs',{name, age, feature, result}).then(layout => {
+                    res.status(200).render('breastCancer',{layout});
+                });
+            }).catch(error => {
+                console.error('Error:', error.message);
+            });
+        }
+    }catch(e){
+        console.log(">> Something wrong to process recent request!\n");
+    }
+});
 function WEB(port){
     this.active = true;
     this.port = port;
