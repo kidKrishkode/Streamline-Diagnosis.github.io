@@ -99,7 +99,7 @@ System.prototype.dobToage = function(dob){
     return (new Date().getFullYear()) - ((dob[0]*1000)+(dob[1]*100)+(dob[2]*10)+(dob[3]*1));
 }
 System.prototype.encodedURI = function(head, url, key){
-    let hash = [['0','*z'],['1','*y'],['2','*x'],['3','*w'],['4','*v'],['5','*u'],['6','*t'],['7','*s'],['8','*r'],['9','*q'],['&',0],['+',1],['=',2],['-',3],['a',4],['e',5],['i',6],['n',7],['u',8],['g',9]];
+    let hash = [["0","*z"],["1","*y"],["2","*x"],["3","*w"],["4","*v"],["5","*u"],["6","*t"],["7","*s"],["8","*r"],["9","*q"],["&",0],["+",1],["=",2],["-",3],["a",4],["e",5],["i",6],["n",7],["u",8],["g",9],["r","!h"],["l","!i"],["t","!j"]];
     let str = url.toString().toLowerCase();
     for(let i=0; i<hash.length; i++){
         str = str.replaceAll(hash[i][0], hash[i][1]);

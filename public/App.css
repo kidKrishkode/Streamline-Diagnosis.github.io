@@ -227,10 +227,10 @@ footer{
 .hambarger-menu ul li:nth-child(4){
     border: none;
 }
-#diabetes .home-body-left{
+.diseas .home-body-left{
     padding: 5% 15px;
 }
-#diabetes form .form-head{
+.diseas form .form-head{
     background: var(--heading-color);
     color: #fff;
     font-weight: 600;
@@ -239,7 +239,7 @@ footer{
     padding: 8px;
     margin-bottom: 20px;
 }
-#diabetes form .form-body{
+.diseas form .form-body{
     width: 100%;
     margin: 0px;
     margin-bottom: 15px;
@@ -438,7 +438,6 @@ footer{
 .modal-body p,.modal-info p{
     font-size: 14px;
     color: grey;
-    text-transform: capitalize;
     line-height: 25px;
     padding: 0px 5px;
     font-weight: bold;
@@ -638,6 +637,7 @@ footer{
     background: var(--target-color);
     border-radius: 10px;
     box-shadow: 0px 0px 4px 1px grey;
+    z-index: 95;
     cursor: grab;
 }
 .not-notes #botDiv{
@@ -733,7 +733,7 @@ footer{
     .content{
         display: none;
     }
-    #diabetes .home-body-right{
+    .diseas .home-body-right{
         display: none;
     }
     .related-diagnosis ul{
