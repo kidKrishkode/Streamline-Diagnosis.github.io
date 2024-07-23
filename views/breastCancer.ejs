@@ -35,7 +35,7 @@
 			</button>
         </nav>
 	</header>
-    <section id="diabetes" class="workspace diseas">
+    <section id="breastCancer" class="workspace diseas">
         <div class="related-diagnosis">
             <% if (typeof relatedDiagnosis !== 'undefined'){ %>
                 <ul id="related-diagnosis">
@@ -45,46 +45,49 @@
         </div>
         <div class="home-body flo">
             <div class="home-body-left">
-                <!-- <form action="/diabetes/predict" method="get"> -->
                 <form onsubmit="validateForm(event);">
-                    <div class="form-head">Diabetes Diagnosis</div>
+                    <!-- age, tumor_size, breast_pain, blood_discharge, shape_change, family_history -->
+                    <div class="form-head">Breast Cancer Diagnosis</div>
                     <div class="form-body">
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="diabetes-name">Name</label>
-                                <input type="name" class="form-control" id="diabetes-name" placeholder="Enter Pasent Name" name="name" required="true" onkeyup="checkName('diabetes-name');"/>
+                                <label for="breastCancer-name">Name</label>
+                                <input type="name" class="form-control" id="breastCancer-name" placeholder="Enter Pasent Name" name="name" required="true" onkeyup="checkName('breastCancer-name');"/>
                                 <small class="form-text text-muted">Enter patient's full name following naming grammar under 25 characters.</small>
                             </div>
                             <div class="col form-group">
-                                <label for="diabetes-age">Age (DOB)</label>
-                                <input type="date" class="form-control" id="diabetes-age" placeholder="Enter Pasent DOB" name="age" required="true" onchange="checkAge('diabetes-age',100,4);"/>
+                                <label for="breastCancer-age">Age (DOB)</label>
+                                <input type="date" class="form-control" id="breastCancer-age" placeholder="Enter Pasent DOB" name="age" required="true" onchange="checkAge('breastCancer-age',100,4);"/>
                                 <small class="form-text text-muted">Enter patient's valid birth date; age between 4 to 95 years.</small>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="diabetes-bp">Blood Pressure</label>
-                                <input type="number" class="form-control" id="diabetes-bp" placeholder="Enter Blood Pressure" name="bp" required="true" onkeyup="checkRange('diabetes-bp',180,70);"/>
+                                <label for="breastCancer-tuS">Tumor Size</label>
+                                <input type="number" class="form-control" id="breastCancer-tuS" placeholder="Enter Tumor Size" name="tuS" required="true" onkeyup="checkRange('breastCancer-tuS',8,0);"/>
                                 <small class="form-text text-muted">Fill Patient's BP measured by doctor; range 70-180 mmHg.</small>
                             </div>
                             <div class="col form-group">
-                                <label for="diabetes-glu">Glucose Level</label>
-                                <input type="number" class="form-control" id="diabetes-glu" placeholder="Enter Glucose Level" name="glu" required="true" onkeyup="checkRange('diabetes-glu',180,80);"/>
-                                <small class="form-text text-muted">Fill Patient's glucose level measured by doctor; range 70-140 mg/dL.</small>
+                                <label for="breastCancer-brP">Breast Pain</label>
+                                <select class="form-control" id="breastCancer-brP" name="brP" required="true" onchange="checkOptions('breastCancer-brP');">
+                                    <option selected="true">NO</option>
+                                    <option>YES</option>
+                                </select>
+                                <small class="form-text text-muted">Select by observation if patient urinates frequently as compared to previous.</small>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="diabetes-fru">Frequent Urination</label>
-                                <select class="form-control" id="diabetes-fru" name="fru" required="true" onchange="checkOptions('diabetes-fru');">
+                                <label for="breastCancer-blD">Blood Discharge</label>
+                                <select class="form-control" id="breastCancer-blD" name="blD" required="true" onchange="checkOptions('breastCancer-blD');">
                                     <option selected="true">NO</option>
                                     <option>YES</option>
                                 </select>
                                 <small class="form-text text-muted">Select by observation if patient urinates frequently as compared to previous.</small>
                             </div>
                             <div class="col form-group">
-                                <label for="diabetes-blv">Blurred Vision</label>
-                                <select class="form-control" id="diabetes-blv" name="blv" required="true" onchange="checkOptions('diabetes-blv');">
+                                <label for="breastCancer-sC">Shape Change</label>
+                                <select class="form-control" id="breastCancer-sC" name="sC" required="true" onchange="checkOptions('breastCancer-sC');">
                                     <option selected="true">NO</option>
                                     <option>YES</option>
                                 </select>
@@ -93,20 +96,12 @@
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
-                                <label for="diabetes-sh">Slow Healing</label>
-                                <select class="form-control" id="diabetes-slh" name="slh" required="true" onchange="checkOptions('diabetes-slh');">
+                                <label for="breastCancer-fH">Family History</label>
+                                <select class="form-control" id="breastCancer-fH" name="fH" required="true" onchange="checkOptions('breastCancer-fH');">
                                     <option selected="true">NO</option>
                                     <option>YES</option>
                                 </select>
                                 <small class="form-text text-muted">Select by observation if patient heals slowly as compared to previous.</small>
-                            </div>
-                            <div class="col form-group">
-                                <label for="diabetes-wl">Weight Loss</label>
-                                <select class="form-control" id="diabetes-wl" name="wl" required="true" onchange="checkOptions('diabetes-wl');">
-                                    <option selected="true">NO</option>
-                                    <option>YES</option>
-                                </select>
-                                <small class="form-text text-muted">Select by observation if patient has lost weight recently as compared to previous.</small>
                             </div>
                         </div>
                     </div>
@@ -118,7 +113,7 @@
             </div>
             <div class="home-body-right">
                 <div class="image">
-                    <img src="../images/diabetes.png" style="margin-top: 40px;" alt="load"/>
+                    <img src="../images/breast_cancer.jpg" alt="load"/>
                 </div>
             </div>
         </div>
@@ -152,26 +147,24 @@ try{
 }
 function validateForm(event){
     event.preventDefault();
-    var name = document.getElementById('diabetes-name').value;
-    var age = document.getElementById('diabetes-age').value;
-    var bp = document.getElementById('diabetes-bp').value;
-    var glu = document.getElementById('diabetes-glu').value;
-    var fru = document.getElementById('diabetes-fru').value=='NO'?0:1;
-    var blv = document.getElementById('diabetes-blv').value=='NO'?0:1;
-    var sh = document.getElementById('diabetes-slh').value=='NO'?0:1;
-    var wl = document.getElementById('diabetes-wl').value=='NO'?0:1;
-    if((name, age, bp, glu) != ''){
+    var name = document.getElementById('breastCancer-name').value;
+    var age = document.getElementById('breastCancer-age').value;
+    var tuS = document.getElementById('breastCancer-tuS').value;
+    var brP = document.getElementById('breastCancer-brP').value=='NO'?0:1;
+    var blD = document.getElementById('breastCancer-blD').value=='NO'?0:1;
+    var sC = document.getElementById('breastCancer-sC').value=='NO'?0:1;
+    var fH = document.getElementById('breastCancer-fH').value=='NO'?0:1;
+    if((name, age, tuS) != ''){
         if(
             system.validUserName(name) && 
             system.validLimit([4,100],system.dobToage(age)) && 
-            system.validLimit([70,180],bp) && 
-            system.validLimit([80,180],glu) && 
-            system.validOptions([0,1],fru) && 
-            system.validOptions([0,1],blv) && 
-            system.validOptions([0,1],sh) && 
-            system.validOptions([0,1],wl) 
+            system.validLimit([0,8],tuS) && 
+            system.validOptions([0,1],brP) && 
+            system.validOptions([0,1],blD) && 
+            system.validOptions([0,1],sC) && 
+            system.validOptions([0,1],fH) 
         ){
-            window.location.href = system.encodedURI("/diabetes/predict",`name=${name.replace(' ','+')}&age=${age}&bp=${bp}&glu=${glu}&fru=${fru}&blv=${blv}&slh=${sh}&wl=${wl}`,13);
+            window.location.href = system.encodedURI("/breastCancer/predict",`name=${name.replace(' ','+')}&age=${age}&tuS=${tuS}&brP=${brP}&blD=${blD}&sC=${sC}&fH=${fH}`,13);
             return true;
         }else{
             alert("Please fill with correct values!");
