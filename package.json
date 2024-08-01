@@ -4,7 +4,6 @@
   "description": "A simple Diagnosis system using Node.js, Express, Sci-kit learn, and EJS",
   "main": "server.js",
   "scripts": {
-    "build": "ejs-cli views/ -o build/",
     "start": "node server.js",
     "test": "node public/App.test.js"
   },
